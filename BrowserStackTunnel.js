@@ -57,6 +57,15 @@ BrowserStackTunnel.prototype = util.mixin(Object.create(_super), /** @lends modu
 	 */
 	killOtherTunnels: false,
 
+
+	/**
+	 * If true, every URL is resolved through the local machine
+	 *
+	 * @type {boolean}
+	 * @default
+	 */
+    forceLocal: true,
+
 	/**
 	 * A list of server URLs that should be proxied by the tunnel. Only the hostname, port, and protocol are used.
 	 *
@@ -143,6 +152,7 @@ BrowserStackTunnel.prototype = util.mixin(Object.create(_super), /** @lends modu
 		this.skipServerValidation && args.push('-skipCheck');
 		this.tunnelId && args.push('-localIdentifier', this.tunnelId);
 		this.verbose && args.push('-v');
+		this.forceLocal && args.push('-forcelocal');
 
 		if (this.proxy) {
 			var proxy = urlUtil.parse(this.proxy);
